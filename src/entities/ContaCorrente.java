@@ -1,6 +1,6 @@
 package entities;
 
-import exceptions.SaqueException;
+import exceptions.ContaException;
 
 public class ContaCorrente extends Conta{
 	
@@ -27,8 +27,10 @@ public class ContaCorrente extends Conta{
 	@Override
 	public void sacar(double quantia) {
 		if(limiteChequeEspecial < Math.abs(this.saldo - quantia)) {
-			throw new SaqueException("Saldo Insuficiente!");
+			throw new ContaException("Saldo Insuficiente!");
 		}
+		if(quantia <= 0)
+			throw new ContaException("A quantia não pode ser 0 ou negativa");
 		this.saldo -= quantia;
 	}
 	

@@ -1,7 +1,7 @@
 package entities;
 
-import exceptions.SaqueException;
-import exceptions.TransferenciaException;
+import exceptions.ContaException;
+
 
 public abstract class Conta {
 	private int numero;
@@ -46,28 +46,38 @@ public abstract class Conta {
 	
 	public void depositar(double quantia) {
 		if(quantia <= 0)
-			throw new SaqueException("A quantia não pode ser 0 ou negativa");
+			throw new ContaException("A quantia não pode ser 0 ou negativa");
 		saldo += quantia;
 		
 	}
 	
 	public void sacar(double quantia) {
 		if(quantia <= 0)
-			throw new SaqueException("A quantia não pode ser 0 ou negativa");
+			throw new ContaException("A quantia não pode ser 0 ou negativa");
 		if(saldo < quantia)
-			throw new SaqueException("Saldo Insuficiente!");
+			throw new ContaException("Saldo Insuficiente!");
 		saldo -= quantia;
 		
 	}
 	
 	public void transferir(double quantia, Conta destino) {
 		if(quantia <= 0)
-			throw new TransferenciaException("A quantia não pode ser 0 ou negativa");
+			throw new ContaException("A quantia não pode ser 0 ou negativa");
 		if(quantia > saldo)
-			throw new TransferenciaException("Saldo Insuficiente!");
+			throw new ContaException("Saldo Insuficiente!");
 		
 		destino.saldo += quantia;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		s.append("Numero: " + numero + "\n");
+		s.append("Titular: " + titular + ", cpf: " + cpf + "\n");
+		s.append("Saldo: " + saldo);
+		return s.toString();
+	}
+	
 	
 	
 	

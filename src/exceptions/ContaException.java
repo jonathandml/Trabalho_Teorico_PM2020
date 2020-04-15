@@ -1,9 +1,9 @@
 package exceptions;
 
-public class SaqueException extends RuntimeException{
+public class ContaException extends RuntimeException{
 	private static final long serialVersionUID = 1L;
 	
-	public SaqueException(String msg) {
+	public ContaException(String msg) {
 		super(msg);
 	}
 
